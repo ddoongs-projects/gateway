@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: member-auth-service-auth-route
+              uri: ${DDOONGS_AUTH_SERVICE}
+              predicates:
+                - Host=auth.ddoongs.dukcode.org
+                - Path=/auth/**
+            - id: member-auth-service-members-route
+              uri: ${DDOONGS_AUTH_SERVICE}
+              predicates:
+                - Host=auth.ddoongs.dukcode.org
+                - Path=/members/**
+            - id: member-auth-service-verifications-route
+              uri: ${DDOONGS_AUTH_SERVICE}
+              predicates:
+                - Host=auth.ddoongs.dukcode.org
+                - Path=/verifications/**
+            - id: oauth2-service-route
+              uri: ${DDOONGS_AUTH_SERVICE}
+              predicates:
+                - Host=auth.ddoong.dukcode.org
+                - Path=/oauth2/authorization/**, /login/oauth2/code/**

@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: member-auth-service-auth-route
+              uri: http://localhost:8080
+              predicates:
+                - Path=/auth/**
+            - id: member-auth-service-members-route
+              uri: http://localhost:8080
+              predicates:
+                - Path=/members/**
+            - id: member-auth-service-verifications-route
+              uri: http://localhost:8080
+              predicates:
+                - Path=/verifications/**
+            - id: oauth2-service-route
+              uri: http://localhost:8080
+              predicates:
+                - Path=/oauth2/authorization/**, /login/oauth2/code/**
